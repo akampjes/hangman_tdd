@@ -1,0 +1,2 @@
+module TriedGameLettersHelper
+end

@@ -1,0 +1,44 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Application	config/application.rb	/^  class Application < Rails::Application$/;"	c	class:HangmanNew
+ApplicationController	app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c
+ApplicationHelper	app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
+CreateGames	db/migrate/20150825224914_create_games.rb	/^class CreateGames < ActiveRecord::Migration$/;"	c
+CreateTriedGameLetters	db/migrate/20150826033737_create_tried_game_letters.rb	/^class CreateTriedGameLetters < ActiveRecord::Migration$/;"	c
+DefaultGameLivesTo8	db/migrate/20150825232334_default_game_lives_to_8.rb	/^class DefaultGameLivesTo8 < ActiveRecord::Migration$/;"	c
+Game	app/models/game.rb	/^class Game < ActiveRecord::Base$/;"	c
+GamePresenter	app/presenters/game_presenter.rb	/^class GamePresenter < SimpleDelegator$/;"	c
+GamesController	app/controllers/games_controller.rb	/^class GamesController < ApplicationController$/;"	c
+GamesHelper	app/helpers/games_helper.rb	/^module GamesHelper$/;"	m
+GetRandomWord	app/services/get_random_word.rb	/^class GetRandomWord$/;"	c
+HangmanNew	config/application.rb	/^module HangmanNew$/;"	m
+PlayTurn	app/services/play_turn.rb	/^class PlayTurn$/;"	c
+PlayTurnsController	app/controllers/play_turns_controller.rb	/^class PlayTurnsController < ApplicationController$/;"	c
+TriedGameLetter	app/models/tried_game_letter.rb	/^class TriedGameLetter < ActiveRecord::Base$/;"	c
+TriedGameLettersController	app/controllers/tried_game_letters_controller.rb	/^class TriedGameLettersController < ApplicationController$/;"	c
+TriedGameLettersHelper	app/helpers/tried_game_letters_helper.rb	/^module TriedGameLettersHelper$/;"	m
+call	app/services/get_random_word.rb	/^  def call$/;"	f	class:GetRandomWord
+call	app/services/play_turn.rb	/^  def call(letter)$/;"	f	class:PlayTurn
+change	db/migrate/20150825224914_create_games.rb	/^  def change$/;"	f	class:CreateGames
+change	db/migrate/20150825232334_default_game_lives_to_8.rb	/^  def change$/;"	f	class:DefaultGameLivesTo8
+change	db/migrate/20150826033737_create_tried_game_letters.rb	/^  def change$/;"	f	class:CreateTriedGameLetters
+create	app/controllers/games_controller.rb	/^  def create$/;"	f	class:GamesController
+create	app/controllers/play_turns_controller.rb	/^  def create$/;"	f	class:PlayTurnsController
+finished?	app/models/game.rb	/^  def finished?$/;"	f	class:Game
+game_params	app/controllers/games_controller.rb	/^  def game_params$/;"	f	class:GamesController
+index	app/controllers/games_controller.rb	/^  def index$/;"	f	class:GamesController
+initialize	app/services/play_turn.rb	/^  def initialize(game:)$/;"	f	class:PlayTurn
+lost?	app/models/game.rb	/^  def lost?$/;"	f	class:Game
+new	app/controllers/games_controller.rb	/^  def new$/;"	f	class:GamesController
+new	app/controllers/play_turns_controller.rb	/^  def new$/;"	f	class:PlayTurnsController
+new_with_word	app/models/game.rb	/^  def self.new_with_word(options = {})$/;"	F	class:Game
+remove_life!	app/models/game.rb	/^  def remove_life!$/;"	f	class:Game
+set_game	app/controllers/games_controller.rb	/^  def set_game$/;"	f	class:GamesController
+show	app/controllers/games_controller.rb	/^  def show$/;"	f	class:GamesController
+won?	app/models/game.rb	/^  def won?$/;"	f	class:Game
+word_progress	app/presenters/game_presenter.rb	/^  def word_progress$/;"	f	class:GamePresenter
+wrap	app/presenters/game_presenter.rb	/^  def self.wrap(collection)$/;"	F	class:GamePresenter

@@ -1,0 +1,31 @@
+<% if @game.won? %>
+  <div>won</div>
+<% elsif @game.lost? %>
+  <div>lost</div>
+<% end %>
+<div><%= @game.lives %> lives remaining</div>
+<div>progress: <%= @game.word_progress %></div>
+<div>Tried letters:</div>
+<ul>
+  <% @game.tried_game_letters.each do |tried_letter| %>
+    <li><%= tried_letter.letter %></li>
+  <% end %>
+</ul>
+
+<%= form_for(@tried_game_letter, url: game_play_turns_path(@game), as: :play_turns) do |f| %>
+  <% if @tried_game_letter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tried_game_letter.errors.count, 'error') %> prohibited this game from being saved:</h2>
+      <ul>
+        <% @tried_game_letter.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <%= f.label :letter %>
+  <%= f.text_field :letter %>
+  <%= f.submit 'Guess' %>
+<% end %>
