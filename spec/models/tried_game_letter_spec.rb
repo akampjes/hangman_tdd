@@ -9,50 +9,54 @@ RSpec.describe TriedGameLetter, type: :model do
     end
 
     it 'belongs to a game' do
-      tried_game_letter = TriedGameLetter.new(game: game)
+      tried_game_letter = game.tried_game_letters.new
 
       expect(tried_game_letter.game).to eq game
     end
   end
 
   describe '#letter' do
-    let(:tried_game_letter) { TriedGameLetter.new(game: game) }
-
-    it 'is invalid if more than one char long' do
-      tried_game_letter.letter = 'aa'
-      
-      expect(tried_game_letter).to be_invalid
-    end
-
-    it 'must be alphabetical' do
-      tried_game_letter.letter = '5'
-
-      expect(tried_game_letter).to be_invalid
-    end
+    subject { game.tried_game_letters.new }
 
     it 'valid as a single alphabetical char' do
-      tried_game_letter.letter = 'a'
-      
-      expect(tried_game_letter).to be_valid
-    end
+      subject.letter = 'a'
 
-    it 'is invalid without a letter' do
-      expect(tried_game_letter).to be_invalid
+      expect(subject).to be_valid
     end
 
     it 'downcases letter' do
-      tried_game_letter.letter = 'A'
+      subject.letter = 'A'
 
-      expect(tried_game_letter.letter).to eq 'a'
+      expect(subject.letter).to eq 'a'
+    end
+
+    describe 'invalid cases' do
+      INVALID_INPUT = ['aa', nil, '5']
+      INVALID_INPUT.each do |input|
+        it "is invalid when passed #{input}" do
+          subject.letter = input
+
+          expect(subject).to be_invalid
+        end
+      end
     end
   end
 
   context 'multiple letters on game' do
     it 'may not add the same letter multiple times on the same game' do
       TriedGameLetter.create!(game: game, letter: 'a')
-      dup_letter = TriedGameLetter.create(game: game, letter: 'a')
-      
+      dup_letter = TriedGameLetter.new(game: game, letter: 'a')
+
       expect(dup_letter).to be_invalid
+    end
+  end
+
+  context 'try to add letters to finished game' do
+    it 'is not valid' do
+      allow(game).to receive(:finished?).and_return(true)
+      tried_game_letter = game.tried_game_letters.new(letter: 'a')
+
+      expect(tried_game_letter).to be_invalid
     end
   end
 end

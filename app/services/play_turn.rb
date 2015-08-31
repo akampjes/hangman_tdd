@@ -4,8 +4,6 @@ class PlayTurn
   end
 
   def call(letter)
-    return false if @game.finished?
-
     tried_game_letter = TriedGameLetter.create(game: @game, letter: letter)
 
     if tried_game_letter.valid?

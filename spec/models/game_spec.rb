@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-  let(:word) { 'potato' }
-  let(:game) { Game.new(word: 'hang') }
+  let(:word) { 'hang' }
+  let(:game) { Game.create!(word: word) }
 
   context 'new' do
     it 'can be created with a word' do
@@ -20,23 +20,25 @@ RSpec.describe Game, type: :model do
     end
 
     it 'may only have positive lives' do
-      game.lives = -1
-      expect(game).to be_invalid
+      subject.lives = -1
+      expect(subject).to be_invalid
     end
 
     it 'may not be created with less than 1 life' do
-      game = Game.new(word: 'hang', lives: 0)
+      game = Game.new(word: word, lives: 0)
       expect(game).to be_invalid
     end
   end
 
   describe '##new_with_word' do
     let(:game) { Game.new_with_word }
+
     it 'creates with a word already' do
       expect(game.word).to be_present
     end
 
     it 'uses a different word each time' do
+      srand(1)
       game2 = Game.new_with_word
 
       expect(game.word).to_not eq game2.word
@@ -56,8 +58,8 @@ RSpec.describe Game, type: :model do
 
   describe '#tried_game_letters' do
     it 'has some tried_game_letters' do
-      tried_game_letter = TriedGameLetter.create!(game: game, letter: 'a')
-      tried_game_letter2 = TriedGameLetter.create!(game: game, letter: 'b')
+      tried_game_letter = game.tried_game_letters.create!(letter: 'a')
+      tried_game_letter2 = game.tried_game_letters.create!(game: game, letter: 'b')
 
       expect(game.tried_game_letters).to eq [tried_game_letter, tried_game_letter2]
     end
@@ -77,10 +79,7 @@ RSpec.describe Game, type: :model do
     end
 
     it 'is finished when won' do
-      TriedGameLetter.create!(game: game, letter: 'h')
-      TriedGameLetter.create!(game: game, letter: 'a')
-      TriedGameLetter.create!(game: game, letter: 'n')
-      TriedGameLetter.create!(game: game, letter: 'g')
+      word.chars.each { |c| game.tried_game_letters.create(letter: c) }
 
       expect(game.finished?).to be true
     end
@@ -98,10 +97,7 @@ RSpec.describe Game, type: :model do
     end
 
     it 'may be won' do
-      TriedGameLetter.create!(game: game, letter: 'h')
-      TriedGameLetter.create!(game: game, letter: 'a')
-      TriedGameLetter.create!(game: game, letter: 'n')
-      TriedGameLetter.create!(game: game, letter: 'g')
+      word.chars.each { |c| game.tried_game_letters.create(letter: c) }
 
       expect(game.won?).to be true
     end

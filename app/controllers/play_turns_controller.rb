@@ -5,10 +5,8 @@ class PlayTurnsController < ApplicationController
     @game = GamePresenter.new(game)
 
     respond_to do |format|
-      if @game.finished?
-        format.html {redirect_to game_path(@game), notice: 'game finished' }
-      elsif @tried_game_letter.valid?
-        format.html {redirect_to game_path(@game), notice: 'successish' }
+      if @tried_game_letter.valid?
+        format.html {redirect_to game_path(@game) }
       else
         format.html { render 'games/show' }
       end

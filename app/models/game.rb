@@ -15,21 +15,15 @@ class Game < ActiveRecord::Base
   end
 
   def won?
-    letters_to_guess.none?
+    # Tried letters include our word?
+    (tried_game_letters.pluck(:letter) & word.chars) == word.chars
   end
 
   def finished?
     won? || lost?
   end
 
-  # TODO - unnescesary(?) parens
   def remove_life!
-    update(lives: (lives - 1))
-  end
-
-  private
-
-  def letters_to_guess
-    tried_game_letters.pluck(:letter) - word.chars
+    update(lives: lives - 1)
   end
 end
