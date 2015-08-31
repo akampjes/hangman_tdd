@@ -5,11 +5,6 @@ class Game < ActiveRecord::Base
   validates :lives, numericality: {greater_than_or_equal_to: 0}
   validates :lives, numericality: {greater_than: 0}, on: :create
 
-  def self.new_with_word(options = {})
-    options[:word] = GetRandomWord.new.call
-    new(options)
-  end
-
   def lost?
     lives <= 0
   end
@@ -21,9 +16,5 @@ class Game < ActiveRecord::Base
 
   def finished?
     won? || lost?
-  end
-
-  def remove_life!
-    update(lives: lives - 1)
   end
 end

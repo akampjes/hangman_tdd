@@ -1,7 +1,7 @@
-class PlayTurnsController < ApplicationController
+class GuessesController < ApplicationController
   def create
     game = Game.find(params[:game_id])
-    @tried_game_letter = PlayTurn.new(game: game).call(params[:play_turns][:letter])
+    @tried_game_letter = PlayTurn.new(game: game).call(params[:guesses][:letter])
     @game = GamePresenter.new(game)
 
     respond_to do |format|

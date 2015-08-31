@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe TriedGameLetter, type: :model do
-  let(:game) { Game.new_with_word }
+  let(:game) { Game.new(word: 'hang') }
 
   context 'belongs to a game' do
     it 'is invalid if there is no game' do
@@ -42,21 +42,12 @@ RSpec.describe TriedGameLetter, type: :model do
     end
   end
 
-  context 'multiple letters on game' do
+  context 'has multiple letters on game' do
     it 'may not add the same letter multiple times on the same game' do
       TriedGameLetter.create!(game: game, letter: 'a')
       dup_letter = TriedGameLetter.new(game: game, letter: 'a')
 
       expect(dup_letter).to be_invalid
-    end
-  end
-
-  context 'try to add letters to finished game' do
-    it 'is not valid' do
-      allow(game).to receive(:finished?).and_return(true)
-      tried_game_letter = game.tried_game_letters.new(letter: 'a')
-
-      expect(tried_game_letter).to be_invalid
     end
   end
 end

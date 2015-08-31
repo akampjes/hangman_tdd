@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe PlayTurnsController, type: :controller do
+RSpec.describe GuessesController, type: :controller do
   let!(:game) { Game.create!(word: 'hang', lives: 4) }
 
-  let(:valid_params) { {game_id: game.id, play_turns: {letter: 'a'}}}
-  let(:invalid_params) { {game_id: game.id, play_turns: {letter: '5'}}}
+  let(:valid_params) { {game_id: game.id, guesses: {letter: 'a'}}}
+  let(:invalid_params) { {game_id: game.id, guesses: {letter: '5'}}}
 
   describe 'POST #create' do
     context 'with valid params' do

@@ -15,7 +15,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new_with_word(game_params)
+    @game = Game.new(game_params.merge({word: PickRandomWord.new.call}))
 
     respond_to do |format|
       if @game.save
@@ -27,6 +27,7 @@ class GamesController < ApplicationController
   end
 
   private
+
   def set_game
     @game = GamePresenter.new(Game.find(params[:id]))
   end
